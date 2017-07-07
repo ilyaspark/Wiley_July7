@@ -6,12 +6,10 @@ if(localStorage.getItem('username') === null){
   $('.task_manager').show();
 }
 
-
 $('#l_f_login').click(function(){
   localStorage.setItem('username',$('#l_f_username').val());
   window.location.reload(false); 
 })
-
 
 var list = $('#current_tasks #tasks_list'),
     list_completed = $('#done_tasks #tasks_list'),
@@ -46,11 +44,7 @@ $('body').on('click', '.task_item', function (){
   }
 })
 
-
 $('#logout').click(function(){
   localStorage.removeItem('username');
   window.location.reload(false); 
 })
-
-
-

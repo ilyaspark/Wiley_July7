@@ -21,12 +21,33 @@ var list = $('#current_tasks #tasks_list'),
 
 $('#b_submit').click(function(){
   var newTask  = $('#i_task').val(),
-    newItem = '<div class="task_item normal_task">' + newTask + '</div>'; 
+    newItem = '<div class="task_item normal_task"><span class="tsk_text">' + newTask + '</span><span class="edit">edit</span></div>'; 
   list.append(newItem);
   tasks = list.html();
   localStorage.setItem(username+'_tasks',tasks);
 
   $('#i_task').val('');
+})
+
+$('body').on('click', '.edit', function (event){
+  event.stopPropagation();
+  var eval = $(this).parent().find('.tsk_text').html();
+  $('.edit_task_form').fadeIn();
+  $('#e_task').val(eval);
+  localStorage.setItem('toReplace',$(this).parent().html());
+})
+
+$('#be_submit').click(function(){
+  $('.edit_task_form').fadeOut();
+  var edits = $('#e_task').val();
+  var toReplace = localStorage.getItem('toReplace');
+  $('#current_tasks #tasks_list .task_item').filter(function() {
+    return $(this).html() == toReplace;
+  }).html(edits+ '</span><span class="edit">Edit task</span></div>');
+  tasks = list.html();        
+  localStorage.setItem(username+'_tasks',tasks);
+  alert('Saved');
+
 })
 
 $('body').on('click', '.task_item', function (){
@@ -43,6 +64,8 @@ $('body').on('click', '.task_item', function (){
       list_completed.append(localStorage.getItem(username+'_tasks'));
   }
 })
+
+
 
 $('#logout').click(function(){
   localStorage.removeItem('username');

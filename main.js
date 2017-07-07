@@ -57,7 +57,7 @@ $('#be_submit').click(function(){
   var toReplace = localStorage.getItem('toReplace');
   $('#current_tasks #tasks_list .task_item').filter(function() {
     return $(this).html() == toReplace;
-  }).html(edits+ '</span><span class="edit">Edit task</span></div>');
+  }).html(edits+ '</span><span class="edit">edit</span></div>');
   tasks = list.html();        
   localStorage.setItem(username+'_tasks',tasks);
   sortList();

@@ -2,8 +2,40 @@
 <html>
 <head>
 	<title>Task manager</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+	<div class="login">
+		<div class="intro">Hey Wiley!</div>
+		<div class="desc">Please select a username</div>
+		<div class="login_form">
+			<input type="text" id="l_f_username" placeholder="Type your username" />
+			<button id="l_f_login">Log in</button>
+		</div>
+	</div>
+	
 
+	<div class="task_manager">
+		<div class="create_task_form">
+			<div class="ctf_intro">Add a task</div>
+			<input type="text" id="i_task" placeholder="Task title" />
+			<button id="b_submit">Create a task</button>
+		</div>
+		<div id="current_tasks">
+			<div class="t_block_title"><b>Current tasks</b> (click to mark as completed)</div>
+			<div id="tasks_list"></div>
+		</div>
+		<div id="done_tasks">
+			<div class="t_block_title"><b>Completed tasks</b> (click to delete)</div>
+			<div id="tasks_list"></div>
+		</div>
+
+		<div id="logout">Logout</div>
+	</div>
+
+
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
+	<script src="main.js"></script>
 </body>
 </html>

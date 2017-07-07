@@ -11,6 +11,18 @@ $('#l_f_login').click(function(){
   window.location.reload(false); 
 })
 
+function sortList(param){
+  var mylist = $('#current_tasks #tasks_list');
+  var listitems = mylist.children('div').get().reverse();
+  listitems.sort(function(a, b) {
+     return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
+  });
+  $.each(listitems, function(index, item) {
+     mylist.append(item); 
+  });
+  mylist.children().each(function(i,div){mylist.prepend(div)})
+}
+
 var list = $('#current_tasks #tasks_list'),
     list_completed = $('#done_tasks #tasks_list'),
     tasks = '',
@@ -18,6 +30,7 @@ var list = $('#current_tasks #tasks_list'),
 
     list.append(localStorage.getItem(username+'_tasks'));
     list_completed.append(localStorage.getItem(username+'_tasks'));
+    sortList();
 
 $('#b_submit').click(function(){
   var newTask  = $('#i_task').val(),
@@ -27,6 +40,7 @@ $('#b_submit').click(function(){
   localStorage.setItem(username+'_tasks',tasks);
 
   $('#i_task').val('');
+  sortList();
 })
 
 $('body').on('click', '.edit', function (event){
@@ -46,8 +60,7 @@ $('#be_submit').click(function(){
   }).html(edits+ '</span><span class="edit">Edit task</span></div>');
   tasks = list.html();        
   localStorage.setItem(username+'_tasks',tasks);
-  alert('Saved');
-
+  sortList();
 })
 
 $('body').on('click', '.task_item', function (){
@@ -63,6 +76,7 @@ $('body').on('click', '.task_item', function (){
       $('#done_tasks #tasks_list').html('');
       list_completed.append(localStorage.getItem(username+'_tasks'));
   }
+  sortList();
 })
 
 
